@@ -1,0 +1,28 @@
+The purpose of this is to use kmeans clustering to cluster countries based on similarities of the following criteria: 
+
+Action taken on climate change
+Better transport and roads
+Support for people who can't work
+Access to clean water and sanitation
+Better healthcare
+A good education
+A responsive government we can trust
+Phone and internet access
+Reliable energy at home
+Affordable and nutritious food
+Protecting forests rivers and oceans
+Protection against crime and violence
+Political freedoms
+Freedom from discrimination and persecution
+Equality between men and women
+Better job opportunities
+
+These are specified in the file countries.csv
+
+
+
+Program is written in Python2 and a test.py file is used to check it (the mean of the kmeans clustering methodology is in kmeans.py)
+The program also outputs the sum of squared error an plots it after each iteration.
+run it using 'python test.py'
+
+Interesting to note that what we may consider 'first world countries' and 'third world countries' are clustered together here
