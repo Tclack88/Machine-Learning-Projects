@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+# First working version completed 19May 2019 in 2 days
+# (original attempt squandered from stolen laptop :/ ) 
+
 import re
 from collections import Counter
 import nltk
@@ -8,6 +11,8 @@ import numpy as np
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import confusion_matrix
 from time import perf_counter
+from contextlib import redirect_stdout
+import pickle
 
 start = perf_counter()
 
@@ -91,6 +96,12 @@ train_data = 'train.list'
 spam_dict = MakeSpamDict(train_data)
 #print(spam_dict)
 sorted_spam_keys = sorted(key for (key,value) in spam_dict.items())
+
+# save sorted_spam_keys to an output file so it can be used again
+# without reconstruction
+with open('spamkeys.py','w') as f:
+	with redirect_stdout(f):
+		print('sorted_spam_keys =',sorted_spam_keys)
 #print(sorted_spam_keys)
 
 train_matrix = CreateFeatureMatrix(train_data,sorted_spam_keys).astype(int)
@@ -110,6 +121,10 @@ test_matrix = CreateFeatureMatrix(test_data,sorted_spam_keys)
 test_labels = CreateSpamLabels(test_data)
 
 result = model.predict(test_matrix)
+outfile = 'spam_model.sav'
+pickle.dump(model,open(outfile,'wb'))
+
+
 cmatrix = confusion_matrix(test_labels,result)
 print(cmatrix)
 correct_predictions = np.trace(cmatrix)
