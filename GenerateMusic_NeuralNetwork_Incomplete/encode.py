@@ -33,9 +33,7 @@ words = list(filter(None,words))
 # combine note_on's (|) and note off's (!)
 k = 1
 for word in words:
-    if ' ' in word:
-        tempwords += word
-    else:
+    if ('!' and "|" in word):
         while ("!" and "|" in word):
             j, k = 0, 1
             if word[j] == "|":
@@ -56,7 +54,9 @@ for word in words:
                 tempword = word[j:k]
                 tempwords += tempword+' '
                 word = word[k:]
-blank = ''
+    else:
+        tempwords += word  # will append blank or only "note_ons" and "note_offs"
+blank = '' 
 # findall instead of split because split returning empty entries
 words = re.split(r'(\S+)',tempwords)
 words = list(filter(None,words))
