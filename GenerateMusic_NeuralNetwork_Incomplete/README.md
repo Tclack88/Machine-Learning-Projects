@@ -1,4 +1,6 @@
+# Generate Music with Neural Network (Incomplete)
 
+See blog post about the subject [here]("https://tclack88.github.io/blog/code,/personal/2019/08/15/music-generation-fail.html")
 
 ## step 1:
 
