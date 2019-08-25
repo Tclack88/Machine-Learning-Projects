@@ -1,6 +1,6 @@
 # Generate Music with Neural Network (Incomplete)
 
-See blog post about the subject [here]("https://tclack88.github.io/blog/code,/personal/2019/08/15/music-generation-fail.html")
+See blog post about the subject [here][link to blog post]
 
 ## step 1:
 
@@ -41,3 +41,5 @@ return to csv
 csv to midi
 
 `csvmidi decoded_music.csv decoded_music.mid`
+
+[link to blog post]: https://tclack88.github.io/blog/code,/personal/2019/08/15/music-generation-fail.html
