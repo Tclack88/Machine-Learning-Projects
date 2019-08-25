@@ -42,4 +42,4 @@ csv to midi
 
 `csvmidi decoded_music.csv decoded_music.mid`
 
-[link to blog post]: https://tclack88.github.io/blog/code,/personal/2019/08/15/music-generation-fail.html
+[link to blog post]: https://tclack88.github.io/blog/code/personal/2019/08/15/music-generation-fail.html
