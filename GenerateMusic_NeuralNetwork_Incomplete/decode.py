@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 
 import re
+import sys
 
-infile = "encoded.txt"
+infile = sys.argv[1]
 
 file = open(infile,"r")
 text = file.read()
