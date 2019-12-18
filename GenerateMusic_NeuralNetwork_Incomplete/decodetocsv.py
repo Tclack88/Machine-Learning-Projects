@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 import pandas as pd
+import sys
 
 
 # ascii-note-dictionary
@@ -23,7 +24,7 @@ convertnote = lambda x : notedict[x[1]]
 
 
 # Decode back to csv
-infile = "convertmeback"
+infile = sys.argv[1]
 
 command = "cat "+infile+" | tr [' '] ['\\n'] > converted"
 
