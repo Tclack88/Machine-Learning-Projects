@@ -5,7 +5,7 @@ See blog post about the subject [here][link to blog post]
 ## step 1:
 
 midicsv a bunch of files
-`for f in $(ls *.mid); do midicsv $f $f.out; done`
+`for f in $(ls *.mid); do midicsv $f $f.csv; done`
 
 ## step 2:
 
