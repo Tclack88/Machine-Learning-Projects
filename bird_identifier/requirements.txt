@@ -1,0 +1,9 @@
+tensorflow==2.3
+pandas
+matplotlib
+seaborn
+librosa
+sklearn
+tqdm
+scipy
+numpy
