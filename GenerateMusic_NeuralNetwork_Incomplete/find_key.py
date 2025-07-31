@@ -1,7 +1,28 @@
 import matplotlib.pyplot as plt
 
+key_signatures={'A': set('A B C# D E F# G#'.split()),
+				'A#': set('A# C D D# F G A'.split()),
+				'B': set('B C# D# E F# G# A#'.split()),
+				'C': set('C D E F G A B'.split()),
+				'C#': set('C# D# F F# G# A# C'.split()),
+				'D': set('D E F# G A B C#'.split()),
+				'D#': set('D# F F# G# A# C C#'.split()),
+				'E': set('E F# G# A B C# D#'.split()),
+				'F': set('F G A A# C D E'.split()),
+				'F#': set('F# F# A#  B C# D# F'.split()),
+				'G': set('G A A# C D D# F'.split()),
+				'G#': set('G# A# C C# D# F G'.split())}
+
 files = """
 chopin_op28_1.mid.csv.out.enc
+chopin_op28_2.mid.csv.out.enc
+chopin_op28_3.mid.csv.out.enc
+chopin_op28_4.mid.csv.out.enc
+chopin_op28_5.mid.csv.out.enc
+chopin_op28_6.mid.csv.out.enc
+chopin_op28_7.mid.csv.out.enc
+chopin_op28_8.mid.csv.out.enc
+chopin_op28_9.mid.csv.out.enc
 chopin_op28_10.mid.csv.out.enc
 chopin_op28_11.mid.csv.out.enc
 chopin_op28_12.mid.csv.out.enc
@@ -12,19 +33,11 @@ chopin_op28_16.mid.csv.out.enc
 chopin_op28_17.mid.csv.out.enc
 chopin_op28_18.mid.csv.out.enc
 chopin_op28_19.mid.csv.out.enc
-chopin_op28_2.mid.csv.out.enc
 chopin_op28_20.mid.csv.out.enc
 chopin_op28_21.mid.csv.out.enc
 chopin_op28_22.mid.csv.out.enc
 chopin_op28_23.mid.csv.out.enc
 chopin_op28_24.mid.csv.out.enc
-chopin_op28_3.mid.csv.out.enc
-chopin_op28_4.mid.csv.out.enc
-chopin_op28_5.mid.csv.out.enc
-chopin_op28_6.mid.csv.out.enc
-chopin_op28_7.mid.csv.out.enc
-chopin_op28_8.mid.csv.out.enc
-chopin_op28_9.mid.csv.out.enc
 """.split()
 
 song_keys = """
@@ -58,6 +71,18 @@ keylist = "A A# B C C# D D# E F F# G G#".split()*7 + "A A# B C".split()
 
 asc_keymap = dict(zip(asclist,keylist))
 
+def keysig_from_count(count_dict):
+	count_sorted = sorted(count_dict.items(), key=lambda x: x[1], reverse=True)
+	most_common = [note[0] for note in count_sorted[:7]]
+	best_note = ''
+	highest_overlap = 0
+	for key,vals in key_signatures.items():
+		overlap = len(vals.intersection(set(most_common)))
+		if overlap > highest_overlap:
+			best_note = key
+			highest_overlap = overlap
+	return best_note
+
 
 
 def add(notes):
@@ -76,7 +101,7 @@ def add(notes):
 		
 
 print(song_keys)
-files = ['chopin_op28_2.mid.csv.out.enc']
+#files = ['chopin_op28_2.mid.csv.out.enc']
 
 for file_in in files:
 	count_dict = {}
@@ -87,11 +112,12 @@ for file_in in files:
 					add(notes[1:])
 
 	count_dict = dict(sorted(count_dict.items(), key=lambda x: x[0]))
+	best_note = keysig_from_count(count_dict)
 	X = count_dict.keys()
 	Y = count_dict.values()
 	Y = [y/sum(Y) for y in Y]
 	plt.bar(X,Y)
-	plt.title(file_in)
+	plt.title(f'{file_in} : {best_note}')
 	plt.show()
 #asc_keymap = {'D': 195, 'A': 255, 'F': 187, 'C': 137, 'A#': 61, 'E': 150, 'B': 81, 'G': 123, 'D#': 28, 'G#': 72, 'F#': 39, 'C#': 45}
 		
