@@ -19,7 +19,6 @@ notedict['tempo']="'"
 notedict[30] = '{' # because this was a comma, but pandas places quotes around everything in that line
 
 symbToAscii = lambda x: notedict[x]
-    
 print(notedict)
 
 
@@ -27,13 +26,13 @@ print(notedict)
 # open song, clean, convert to word text
 #command = "cleaner.sh "+str(sys.argv[1])
 infile = str(sys.argv[1])
-command = "cleaner.sh "+infile
+command = "./cleaner.sh "+infile
 os.system(command)
 
 command = 'echo  "a,b,c,d,e,f\\n$(cat '+infile+')" > '+infile 
-                                            # normally need a '-e' after echo,
-                                            # but python is taking care of it
-                                            # somehow... oh well
+                 # normally need a '-e' after echo,
+                 # but python is taking care of it
+                 # somehow... oh well
 
 
 outfile = infile+".out"

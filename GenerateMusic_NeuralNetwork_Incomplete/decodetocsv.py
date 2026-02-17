@@ -3,7 +3,6 @@ import os
 import pandas as pd
 import sys
 
-
 # ascii-note-dictionary
 asclist = []
 keylist = []
@@ -24,6 +23,7 @@ convertnote = lambda x : notedict[x[1]]
 
 
 # Decode back to csv
+#infile = "convertmeback"
 infile = sys.argv[1]
 
 command = "cat "+infile+" | tr [' '] ['\\n'] > converted"
@@ -35,9 +35,10 @@ df = pd.read_csv("converted",sep='~')
 df['a'] = 1
 df['b'] = df.time.apply(lambda x : x * 10).cumsum()
 df['c'] = df.note.apply(convertmeta)
-df['d'] = 0
+df['d'] = pd.NA
 df.loc[df.c == "tempo", "d"] = df.note
-df.d = df.d.str.extract('(\d+)').fillna(0)
+df.loc[df.c == "tempo", "a"] = 1
+df.d = df.d.str.extract(r'(\d+)').fillna(0)
 df['e'] = df.note.apply(convertnote)
 df['f'] = 50
 print(df.head())
@@ -53,3 +54,4 @@ import subprocess
 end_time = int(subprocess.check_output('tail -1 final | grep -Eo "[0-9]{3,}"',shell=True))
 command = "echo '1,"+str(end_time)+",end_track\n0,0,end_of_file' >> final"
 os.system(command)
+

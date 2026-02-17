@@ -25,6 +25,9 @@ for j in words:
         blank += '!'+j[-1]
     elif ' ' in j:
         j += ' '
+    #elif "'" in j: # keep tempo information
+    #    print("tempo:",j)
+    #    blank += j
 
 
 tempwords = ''
@@ -56,7 +59,7 @@ for word in words:
                 word = word[k:]
     else:
         tempwords += word  # will append blank or only "note_ons" and "note_offs"
-blank = '' 
+blank = ''
 # findall instead of split because split returning empty entries
 words = re.split(r'(\S+)',tempwords)
 words = list(filter(None,words))
