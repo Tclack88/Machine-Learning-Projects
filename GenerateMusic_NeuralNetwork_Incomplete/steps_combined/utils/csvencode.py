@@ -15,18 +15,17 @@ notedict = dict(zip(keylist,asclist))
 notedict[0] = ''
 notedict['note_on_c']='|'
 notedict['note_off_c']='!'
-notedict['tempo']="'"
+#notedict['tempo']="'"
 notedict[30] = '{' # because this was a comma, but pandas places quotes around everything in that line
 
 symbToAscii = lambda x: notedict[x]
-print(notedict)
 
 
 
 # open song, clean, convert to word text
 #command = "cleaner.sh "+str(sys.argv[1])
 infile = str(sys.argv[1])
-command = "./cleaner.sh "+infile
+command = f"utils/cleaner.sh "+infile
 os.system(command)
 
 command = 'echo  "a,b,c,d,e,f\\n$(cat '+infile+')" > '+infile 
@@ -35,7 +34,7 @@ command = 'echo  "a,b,c,d,e,f\\n$(cat '+infile+')" > '+infile
                  # somehow... oh well
 
 
-outfile = infile+".out"
+outfile = "step1.out"
 
 os.system(command)
 df = pd.read_csv(infile)
@@ -44,9 +43,8 @@ df.b = df.b.diff().fillna(0).astype(int)
 df = df.round({'b':-1})
 df.e = df.e.fillna(0).astype(int) #tempo has blank for col e. Filling with 0's works
 df['out'] = df['b'].apply(lambda x: x //10).astype(str)+'~'+df['c'].apply(symbToAscii)+df['e'].apply(symbToAscii)
-df.loc[df.c == 'tempo','out'] += str(df.loc[df.c == 'tempo','d'].iloc[0].astype(int))
+#df.loc[df.c == 'tempo','out'] += str(df.loc[df.c == 'tempo','d'].iloc[0].astype(int))
 df["out"].to_csv(outfile,header=False,index=False)
-print(df.head(20))
 
 command = "cat "+outfile+" | tr ['\\n'] [' '] > tempfile && mv tempfile "+outfile
 os.system(command)

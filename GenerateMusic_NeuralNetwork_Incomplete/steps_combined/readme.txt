@@ -1,0 +1,1 @@
+test implementation. Keeping the tools in a /util and calling a single `mid2csv.sh INFILE` will appear to in one sep create the text representation OF ONE SONG (defaults to INIFILE.out). Then `csv2mid.sh INFILE OUTFILE` will convert back to midi (eg. on any generated songs)
