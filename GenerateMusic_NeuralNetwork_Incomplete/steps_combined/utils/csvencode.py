@@ -38,6 +38,7 @@ outfile = "step1.out"
 
 os.system(command)
 df = pd.read_csv(infile)
+df = df.sort_values('b') # align timestamps if different tracks exist
 df = df.drop(['a','f'],axis=1)
 df.b = df.b.diff().fillna(0).astype(int)
 df = df.round({'b':-1})

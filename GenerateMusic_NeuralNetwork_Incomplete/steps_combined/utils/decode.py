@@ -9,7 +9,7 @@ file = open(infile,"r")
 text = file.read()
 file.close()
 
-words = re.split(r'(\s+)',text)
+words = [' ']+re.split(r'(\s+)',text) # blank in first entry necessary to prevent errors
 words = [w for w in words if w] # remove empty lines
 
 # split notes up to fit the original ecryption scheme
