@@ -9,6 +9,8 @@ fi
 INFILE=$1
 OUTFILE=$2
 
+/usr/bin/python3 utils/correct_output.py $INFILE
+
 /usr/bin/python3 utils/decode.py $INFILE
 
 /usr/bin/python3 utils/decodetocsv.py step3.out
@@ -16,6 +18,4 @@ OUTFILE=$2
 mv step4.out $INFILE.dec
 rm step3.out converted
 
-csvmidi $INFILE.dec > $OUTFILE
-
-echo "midi file produced: $OUTFILE"
+csvmidi $INFILE.dec > $OUTFILE && rm $INFILE.dec && echo "midi file produced: $OUTFILE"
